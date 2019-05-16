@@ -155,8 +155,8 @@ echo "+++++++++++++++++++++++++++"
 systemctl daemon-reload
 systemctl enable xo-server.service
 service xo-server start
-firewall-cmd --zone=public --add-port=80/http --permanent
-firewall-cmd --zone=public --add-port=443/https --permanent
+firewall-cmd --zone=public --add-port=80/tcp --permanent
+firewall-cmd --zone=public --add-port=443/tcp --permanent
 firewall-cmd --reload
 
 #service firewalld stop
