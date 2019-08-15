@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 ##
 merah=$(tput setaf 1)
 hijau=$(tput setaf 2)
