@@ -66,7 +66,7 @@ echo "Yarn package version $yarn"
 sleep 10
 
 echo "${hijau}..................................."
-echo "clone xoa engine from source"
+echo "clone xoa from source"
 echo "${hijau}..................................."
 cd /opt/
 /usr/bin/git clone https://github.com/vatesfr/xen-orchestra 
