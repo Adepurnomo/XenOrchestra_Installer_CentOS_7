@@ -48,7 +48,7 @@ sleep 1
 echo "${hijau}..................................."
 echo "Install Open SSL.."
 /bin/yum install mod_ssl -y > /dev/null 2>&1
-# enable service redis  dll 
+# enable service redis etc 
 echo "enable redis server..."
 echo "${hijau}..................................."
 /bin/systemctl enable redis && /bin/systemctl start redis
@@ -137,12 +137,12 @@ echo "...  Configure self sign ssl for xoa    ..."
 echo "${hijau}..................................."
 sleep 2
 mkdir /opt/cert
-chmod 700 /root/cert
+chmod 700 /opt/cert
 echo "Generate self ssl"
 echo "${hijau}..................................."
-openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /root/cert/key-selfsigned.pem -out /opt/cert/cert-selfsigned.pem -subj "/C=Id/ST=DKI Jakarta/L=Jakarta/O=Ade Purnomo/OU=IT Department/CN=Port of Tanjung Priok"
-openssl dhparam -out /root/cert/dhparam.pem 2048
-/bin/cat /opt/cert/dhparam.pem | tee -a /etc/ssl/certs/cert-selfsigned.pem
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /opt/cert/key-selfsigned.pem -out /opt/cert/cert-selfsigned.pem -subj "/C=Id/ST=DKI Jakarta/L=Jakarta/O=Ade Purnomo/OU=IT Department/CN=Port of Tanjung Priok"
+openssl dhparam -out /opt/cert/dhparam.pem 2048
+/bin/cat /opt/cert/dhparam.pem | tee -a /opt/cert/cert-selfsigned.pem
 echo "+++++++++++++++++++++++++++"
 echo "========="DONE"============"
 echo "+++++++++++++++++++++++++++"
