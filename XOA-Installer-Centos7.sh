@@ -106,10 +106,10 @@ sleep 2
 cd /root/
 /bin/git clone https://github.com/Adepurnomo/test.git
 \cp /root/test/issue.net /etc
-chmod a+x /etc/issue.net
+/bin/chmod a+x /etc/issue.net
 cd /etc/ssh/ 	
 /bin/sed -i "s|#Banner none|Banner /etc/issue.net|" sshd_config
-/bin/chmod a+x etc/ssh/sshd_config
+/bin/chmod a+x /etc/ssh/sshd_config
 /bin/rm -rf /root/test
 #Create service for xoa
 echo "${hijau}..................................."
@@ -137,7 +137,7 @@ echo "...  Configure self sign ssl for xoa    ..."
 echo "${hijau}..................................."
 sleep 2
 mkdir /opt/cert
-chmod 700 /opt/cert
+/bin/chmod 700 /opt/cert
 echo "Generate self ssl"
 echo "${hijau}..................................."
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /opt/cert/key-selfsigned.pem -out /opt/cert/cert-selfsigned.pem -subj "/C=Id/ST=DKI Jakarta/L=Jakarta/O=Ade Purnomo/OU=IT Department/CN=Port of Tanjung Priok"
@@ -153,8 +153,8 @@ echo "+++++++++++++++++++++++++++"
 
 /bin/systemctl daemon-reload
 /bin/systemctl enable xo-server.service
-/bin/service xo-server start 
-/bin/service xo-server status
+/bin/systemctl xo-server start 
+/bin/systemctl xo-server status
 
 sleep 2
 echo "${hijau}..................................."
