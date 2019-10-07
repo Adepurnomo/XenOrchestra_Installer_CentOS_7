@@ -3,7 +3,8 @@
 clear
 hijau=$(tput setaf 2)
 echo "${hijau}######################################"
-echo "${hijau}Please run this scripts on SU"
+echo "${hijau}Please run this scripts on SU !"
+sudo su -
 echo "${hijau}Min spec for cluster, backup, continues"
 echo "${hijau}replication (DC-DR),load balancing etc"
 echo "${hijau}4vCPU, 16GB RAM, NIC 10G or Bounded"
