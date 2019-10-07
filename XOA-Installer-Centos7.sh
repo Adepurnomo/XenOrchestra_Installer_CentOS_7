@@ -152,9 +152,9 @@ openssl dhparam -out /opt/cert/dhparam.pem 2048 > /dev/null 2>&1
 /bin/systemctl enable xo-server.service && /bin/systemctl start xo-server 
 
 sleep 2
-echo "+++++++++++++++++++++++++++"
-echo "========="DONE"============"
-echo "+++++++++++++++++++++++++++"
+echo "${hijau}+++++++++++++++++++++++++++"
+echo "${hijau}========="DONE"============"
+echo "${hijau}+++++++++++++++++++++++++++"
 host=$(hostname -I)
 echo "and then acces https://$host"
 echo "username : admin@admin.net"
