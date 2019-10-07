@@ -155,8 +155,8 @@ echo "+++++++++++++++++++++++++++"
 
 /bin/systemctl daemon-reload
 /bin/systemctl enable xo-server.service
-/bin/systemctl xo-server start 
-/bin/systemctl xo-server status
+/bin/systemctl start xo-server 
+/bin/systemctl status xo-server
 
 sleep 2
 echo "${hijau}..................................."
