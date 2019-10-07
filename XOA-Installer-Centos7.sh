@@ -63,9 +63,7 @@ yarn=$(yarn --version)
 echo "Node js version $node"
 echo "NPM version $npm"
 echo "Yarn package version $yarn"
-
 sleep 10
-
 echo "${hijau}..................................."
 echo "clone xoa from source"
 echo "${hijau}..................................."
@@ -145,29 +143,24 @@ echo "${hijau}..................................."
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /opt/cert/key-selfsigned.pem -out /opt/cert/cert-selfsigned.pem -subj "/C=Id/ST=DKI Jakarta/L=Jakarta/O=Ade Purnomo/OU=IT Department/CN=Port of Tanjung Priok"
 openssl dhparam -out /opt/cert/dhparam.pem 2048 > /dev/null 2>&1
 /bin/cat /opt/cert/dhparam.pem | tee -a /opt/cert/cert-selfsigned.pem
-echo "+++++++++++++++++++++++++++"
-echo "========="DONE"============"
-echo "+++++++++++++++++++++++++++"
 
 /bin/firewall-cmd --zone=public --add-port=80/tcp --permanent 
 /bin/firewall-cmd --zone=public --add-port=443/tcp --permanent
 /bin/firewall-cmd --reload
 
 /bin/systemctl daemon-reload
-/bin/systemctl enable xo-server.service
-/bin/systemctl start xo-server 
-/bin/systemctl status xo-server
+/bin/systemctl enable xo-server.service && /bin/systemctl start xo-server 
 
 sleep 2
-echo "${hijau}..................................."
-echo "done"
-echo "${hijau}..................................."
+echo "+++++++++++++++++++++++++++"
+echo "========="DONE"============"
+echo "+++++++++++++++++++++++++++"
 host=$(hostname -I)
 echo "and then acces https://$host"
 echo "username : admin@admin.net"
 echo "password : admin"
 #echo "follow my ig @nextorchestra / @pauziah_collection"
 echo "${hijau}------------------------------------------------"
-service sshd restart
-echo "--------------------------------------------------------------"
+/bin/systemctl restart sshd.service > /dev/null 2>&1
+
 
