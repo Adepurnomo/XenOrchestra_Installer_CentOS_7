@@ -133,15 +133,16 @@ WantedBy=multi-user.target
 EOF
 
 echo "${hijau}..................................."
-echo "...  Configure self sign ssl for xoa    ..."
+echo "     Configure self sign ssl for xoa       "
 echo "${hijau}..................................."
 sleep 2
 mkdir /opt/cert
 /bin/chmod 700 /opt/cert
 echo "Generate self ssl"
+echo "Please wait......"
 echo "${hijau}..................................."
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /opt/cert/key-selfsigned.pem -out /opt/cert/cert-selfsigned.pem -subj "/C=Id/ST=DKI Jakarta/L=Jakarta/O=Ade Purnomo/OU=IT Department/CN=Port of Tanjung Priok"
-openssl dhparam -out /opt/cert/dhparam.pem 2048
+openssl dhparam -out /opt/cert/dhparam.pem 2048 > /dev/null 2>&1
 /bin/cat /opt/cert/dhparam.pem | tee -a /opt/cert/cert-selfsigned.pem
 echo "+++++++++++++++++++++++++++"
 echo "========="DONE"============"
