@@ -103,13 +103,13 @@ echo "attach kebo banner :v"
 echo "${hijau}..................................."
 sleep 2
 cd /root/
-/bin/git clone https://github.com/Adepurnomo/test.git
-\cp /root/test/issue.net /etc
+/bin/git clone https://github.com/Adepurnomo/banner.git
+\cp /root/banner/issue.net /etc
 /bin/chmod a+x /etc/issue.net
 cd /etc/ssh/ 	
 /bin/sed -i "s|#Banner none|Banner /etc/issue.net|" sshd_config
 /bin/chmod a+x /etc/ssh/sshd_config
-/bin/rm -rf /root/test
+/bin/rm -rf /root/banner
 #Create service for xoa
 echo "${hijau}..................................."
 echo "........ write service on systemd ........."
