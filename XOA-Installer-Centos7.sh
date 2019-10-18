@@ -1,12 +1,15 @@
 #!/bin/bash
 ##
 clear
+echo "Simple scripts"
 hijau=$(tput setaf 2)
 echo "${hijau}######################################"
 echo "${hijau}Please run this scripts on SU !"
 sudo su -
 echo "${hijau}Min spec for cluster, backup, continues"
-echo "${hijau}replication (DC-DR),load balancing etc"
+echo "${hijau}replication (DC-DR),load balancing etc,"
+echo "${hijau}for XenServer/CitrixHyprrvisor/XCP-NG  "
+echo "${hijau}Like XCP, use guest tools from citrix xen"
 echo "${hijau}4vCPU, 16GB RAM, NIC 10G or Bounded"
 echo "${hijau}######################################"
 tuned-adm profile network-throughput
@@ -144,7 +147,9 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /opt/cert/key-selfsi
 openssl dhparam -out /opt/cert/dhparam.pem 2048 > /dev/null 2>&1
 /bin/cat /opt/cert/dhparam.pem | tee -a /opt/cert/cert-selfsigned.pem
 
+echo "Allow port 80 on firewalld"
 /bin/firewall-cmd --zone=public --add-port=80/tcp --permanent 
+echo "Allow port 443 on firewalld"
 /bin/firewall-cmd --zone=public --add-port=443/tcp --permanent
 /bin/firewall-cmd --reload
 
