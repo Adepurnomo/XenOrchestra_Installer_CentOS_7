@@ -4,6 +4,5 @@ Manage your hypervisor, like XCP-NG or Citrix hypervisor with xoa.
 
 Use curl / wget
 
-run --> curl -sL https://raw.githubusercontent.com/Adepurnomo/XenOrchestra-auto-installer-for-Centos7/master/XOA-Installer-Centos7.sh | sh
-
-run --> wget -O- https://raw.githubusercontent.com/Adepurnomo/XenOrchestra-auto-installer-for-Centos7/master/XOA-Installer-Centos7.sh | sh
+run --> curl -sL https://raw.githubusercontent.com/Adepurnomo/XenOrchestra_Installer_Centos7/master/XOA-Installer-Centos7.sh | sh
+run --> wget -O- https://raw.githubusercontent.com/Adepurnomo/XenOrchestra_Installer_Centos7/master/XOA-Installer-Centos7.sh | sh
