@@ -42,7 +42,6 @@ echo "Install vhd tools...."
 /bin/rpm -ivh https://forensics.cert.org/cert-forensics-tools-release-el7.rpm > /dev/null 2>&1
 /bin/sed -i 's/enabled=1/enabled=0/g' /etc/yum.repos.d/cert-forensics-tools.repo > /dev/null 2>&1
 /bin/yum --enablerepo=forensics install -y libvhdi-tools > /dev/null 2>&1
-# install kebutuhan xoa
 echo "Install tool 4 xoa..."
 echo "${hijau}..................................."
 sleep 1
@@ -90,7 +89,7 @@ chmod a+x /opt/xen-orchestra/packages/xo-server/.xo-server.toml
 /bin/sed -i "s|#'/' = '/path/to/xo-web/dist/'|'/' = '../xo-web/dist/'|" .xo-server.toml
 /bin/sed -i "s|port = 80|#port = 80|" .xo-server.toml
 /bin/sed -i "s|# port = 443|port = 443|" .xo-server.toml
-# certificate name design auto generate after install xo.
+# put certificate for xoa.
 /bin/sed -i "s|# cert = './certificate.pem'|cert = '/opt/cert/cert-selfsigned.pem'|" .xo-server.toml
 /bin/sed -i "s|# key = './key.pem'|key = '/opt/cert/key-selfsigned.pem'|" .xo-server.toml
 # create node
@@ -118,7 +117,6 @@ echo "........ write service on systemd ........."
 echo "${hijau}..................................."
 /bin/cat << EOF >> /etc/systemd/system/xo-server.service
 # Systemd service for XO-Server.
-
 [Unit]
 Description= XO Server
 After=network-online.target
