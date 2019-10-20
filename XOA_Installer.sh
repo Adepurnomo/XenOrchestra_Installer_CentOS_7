@@ -1,7 +1,7 @@
 #!/bin/bash
 ##
 clear
-echo "Bsic ipts"
+echo "Basic scripts"
 hijau=$(tput setaf 2)
 echo "${hijau}###########################################"
 echo "${hijau}Please run this scripts on SU !"
@@ -123,7 +123,7 @@ After=network-online.target
 [Service]
 WorkingDirectory=/opt/xen-orchestra/packages/xo-server/
 ExecStart=/usr/bin/node ./bin/xo-server
-Restart=always
+Restart=on-failure
 SyslogIdentifier=xo-server
 
 [Install]
