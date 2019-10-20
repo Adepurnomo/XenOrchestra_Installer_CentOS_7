@@ -4,4 +4,4 @@
 
 Use curl 
 
-run --> curl -sL https://raw.githubusercontent.com/Adepurnomo/XenOrchestra_Installer_CentOS/master/XOA_nstaller | sh
+run --> curl -sL https://raw.githubusercontent.com/Adepurnomo/XenOrchestra_Installer_CentOS/master/XOA_Installer.sh | bash
