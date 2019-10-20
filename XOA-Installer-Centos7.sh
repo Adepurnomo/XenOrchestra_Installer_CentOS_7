@@ -17,8 +17,7 @@ hostnamectl set-hostname XOA
 echo "${hijau}..................................."
 echo "${hijau}Working...."
 echo "${hijau}Please wait.."
-/bin/yum install epel-release -y > /dev/null 2>&1
-/bin/yum install curl -y  > /dev/null 2>&1
+/bin/yum install epel-release curl -y > /dev/null 2>&1
 #yum update -y > /dev/null 2>&1
 # add repo node js
 echo "${hijau}..................................."
