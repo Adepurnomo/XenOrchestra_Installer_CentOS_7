@@ -1,6 +1,6 @@
 # XOA Auto Installer with OpenSSL (For Centos 7 or 8)
   Manage hypervisor, like XCP-NG or Citrix hypervisor with xoa.
-# Enjoy !!!
+# Enjoy !
 
 Use curl 
 
