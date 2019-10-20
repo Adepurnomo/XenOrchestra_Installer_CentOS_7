@@ -45,7 +45,7 @@ echo "Install vhd tools...."
 echo "Install tool 4 xoa..."
 echo "${hijau}..................................."
 sleep 1
-/bin/yum install gcc gcc-c++ make openssl-devel redis libpng-devel python git nfs-utils -y > /dev/null 2>&1
+/bin/yum install gcc gcc-c++ make openssl-devel redis libpng-devel python36 git nfs-utils -y > /dev/null 2>&1
 # install ssl
 echo "${hijau}..................................."
 echo "Install Open SSL.."
