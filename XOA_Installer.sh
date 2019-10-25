@@ -114,7 +114,7 @@ chmod a+x /opt/xen-orchestra/packages/xo-server/.xo-server.toml
 /bin/sed -i "s|# cert = './certificate.pem'|cert = '/opt/cert/cert-selfsigned.pem'|" .xo-server.toml
 /bin/sed -i "s|# key = './key.pem'|key = '/opt/cert/key-selfsigned.pem'|" .xo-server.toml
 # create node
-
+clear
 echo "Create node ..."
 echo "${kuning}..................................."
 sleep 2
