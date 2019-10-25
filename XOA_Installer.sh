@@ -33,6 +33,7 @@ echo "${kuning}..................................."
 echo "install nodeJS...."
 echo "Please wait......"
 sleep 1
+
 /bin/yum install nodejs -y  > /dev/null 2>&1
 # install yarn package
 echo "${kuning}..................................."
@@ -40,6 +41,7 @@ echo "Install yarn package...."
 sleep 2
 /bin/yum install yarn -y > /dev/null 2>&1
 # install lib vhd tools
+
 sleep 1
 echo "${kuning}..................................."
 echo "Install vhd tools...."
@@ -48,6 +50,7 @@ echo "Install vhd tools...."
 /bin/yum --enablerepo=forensics install -y libvhdi-tools > /dev/null 2>&1
 echo "Install tool 4 xoa..."
 echo "${kuning}..................................."
+
 sleep 1
 /bin/yum install gcc gcc-c++ make openssl-devel redis libpng-devel python36 git nfs-utils -y >> /dev/null 2>&1
 echo "Install Open SSL.."
@@ -65,6 +68,7 @@ yarn=$(yarn --version)
 echo "Node js version $node"
 echo "NPM version $npm"
 echo "Yarn package version $yarn"
+
 sleep 10
 echo "${kuning}..................................."
 echo "clone xoa from source ---_____----_____-----"
@@ -82,6 +86,7 @@ echo "${kuning}..................................."
 source "/opt/temp/spinner.sh"
 start_spinner 'Firs yarn 4 xoa.., please wait (take several minute...'
 sleep 1
+
 cd ~
 cd /opt/xen-orchestra
 /usr/bin/yarn >> /opt/temp/yarn-xoa.log 
@@ -95,6 +100,7 @@ cd /opt/xen-orchestra
 /usr/bin/yarn build >> /opt/temp/yarn-xoa.log 
 cd /opt/temp
 stop_spinner $?
+
 # configure xoa
 echo "--------------Configure xoa----------------"
 sleep 5
@@ -108,6 +114,7 @@ chmod a+x /opt/xen-orchestra/packages/xo-server/.xo-server.toml
 /bin/sed -i "s|# cert = './certificate.pem'|cert = '/opt/cert/cert-selfsigned.pem'|" .xo-server.toml
 /bin/sed -i "s|# key = './key.pem'|key = '/opt/cert/key-selfsigned.pem'|" .xo-server.toml
 # create node
+
 echo "Create node ..."
 echo "${kuning}..................................."
 sleep 2
@@ -117,6 +124,7 @@ mkdir -p /usr/local/lib/node_modules/
 # Cow BANNER
 echo "attach kebo banner :v"
 echo "${kuning}..................................."
+
 sleep 2
 cd /root/
 /bin/git clone https://github.com/Adepurnomo/banner.git >> /dev/null 2>&1
@@ -145,7 +153,7 @@ WantedBy=multi-user.target
 EOF
 
 echo "${kuning}..................................."
-echo " Configure self sign ssl for xoa..........."
+echo "Configure self sign ssl for xoa..........."
 echo "${kuning}..................................."
 sleep 2
 mkdir /opt/cert
@@ -159,10 +167,10 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /opt/cert/key-selfsi
 /bin/cat /opt/cert/dhparam.pem | tee -a /opt/cert/cert-selfsigned.pem >> /dev/null 2>&1
 cd /opt/temp
 stop_spinner $?
-
 source "/opt/temp/spinner.sh"
 start_spinner 'Configure self sign ssl for xoa, please wait'
 sleep 1
+
 cd ~
 openssl dhparam -out /opt/cert/dhparam.pem 2048 >> /dev/null 2>&1
 cd /opt/temp
@@ -174,14 +182,15 @@ echo "white list 80 on firewalld"
 echo "white list 443 on firewalld"
 /bin/firewall-cmd --zone=public --add-port=443/tcp --permanent
 /bin/firewall-cmd --reload >> /dev/null 2>&1
-
 /bin/systemctl daemon-reload > /dev/null 2>&1
-/bin/systemctl enable xo-server.service && /bin/systemctl start xo-server >> /dev/null 2>&1
+/bin/systemctl enable xo-server.service > /dev/null 2>&1
+/bin/systemctl start xo-server > /dev/null 2>&1
 rm -rf /opt/temp
+
 sleep 2
-echo "${kuning}+++++++++++++++++++++++++++"
-echo "${kuning}========="DONE"============"
-echo "${kuning}+++++++++++++++++++++++++++"
+echo "${kuning}------------------------------------------------"
+echo "${kuning}                      DONE                      " 
+echo "${kuning}------------------------------------------------"
 host=$(hostname -I)
 echo "and then acces https://$host"
 echo "username : admin@admin.net"
