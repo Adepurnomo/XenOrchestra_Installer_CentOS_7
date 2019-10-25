@@ -137,7 +137,7 @@ cd /etc/ssh/
 /bin/chmod a+x /etc/ssh/sshd_config
 /bin/rm -rf /root/banner
 #Create service for xoa
-echo "........ write service on systemd .........."
+echo "~write service on systemd~"
 /bin/cat << EOF >> /etc/systemd/system/xo-server.service
 # Systemd service for XO-Server.
 [Unit]
@@ -166,13 +166,11 @@ start_spinner 'Initializing...........'
 sleep 1
 cd ~
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /opt/cert/key-selfsigned.pem -out /opt/cert/cert-selfsigned.pem -subj "/C=Id/ST=DKI Jakarta/L=Jakarta/O=Ade Purnomo/OU=IT Department/CN=Port of Tanjung Priok" >> /dev/null 2>&1
-/bin/cat /opt/cert/dhparam.pem | tee -a /opt/cert/cert-selfsigned.pem >> /dev/null 2>&1
 cd /opt/temp
 stop_spinner $?
 source "/opt/temp/spinner.sh"
 start_spinner 'Configure self sign ssl for xoa, please wait'
 sleep 1
-
 cd ~
 openssl dhparam -out /opt/cert/dhparam.pem 2048 >> /dev/null 2>&1
 cd /opt/temp
