@@ -58,9 +58,11 @@ echo "Install Open SSL.."
 # enable service redis etc 
 echo "enable redis server..."
 echo "${kuning}..................................."
-/bin/systemctl enable redis && /bin/systemctl start redis > /dev/null 2>&1
-/bin/systemctl enable rpcbind && /bin/systemctl start rpcbind > /dev/null 2>&1
-echo " Tools succes install"
+/bin/systemctl enable redis > /dev/null 2>&1
+/bin/systemctl start redis > /dev/null 2>&1
+/bin/systemctl enable rpcbind > /dev/null 2>&1
+/bin/systemctl start rpcbind > /dev/null 2>&1
+echo "Tools succes install"
 echo "${kuning}..................................."
 node=$(node -v) 
 npm=$(npm -v)
