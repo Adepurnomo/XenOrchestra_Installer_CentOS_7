@@ -20,9 +20,9 @@ echo "${kuning}Please wait.."
 /bin/yum install epel-release curl -y > /dev/null 2>&1
 #yum update -y > /dev/null 2>&1
 #add repo node js
--p /opt/temp
-curl -o /opt/temp/spinner.sh https://raw.githubusercontent.com/tlatsas/bash-spinner/master/spinner.sh >> /dev/null 2>&1
-chmod a+x /opt/temp/spinner.sh
+sudo mkdir -p /opt/temp
+sudo curl -o /opt/temp/spinner.sh https://raw.githubusercontent.com/tlatsas/bash-spinner/master/spinner.sh >> /dev/null 2>&1
+sudo chmod a+x /opt/temp/spinner.sh
 
 echo "${kuning}..................................."
 echo "add repo nodeJS v8.xx..."
@@ -67,7 +67,7 @@ echo "NPM version $npm"
 echo "Yarn package version $yarn"
 sleep 10
 echo "${kuning}..................................."
-echo "clone xoa from source ---_____----___"
+echo "clone xoa from source ---_____----_____-----"
 cd /opt/
 /usr/bin/git clone https://github.com/vatesfr/xen-orchestra >> /dev/null 2>&1
 # allow config restore
@@ -155,7 +155,7 @@ source "/opt/temp/spinner.sh"
 start_spinner 'Initializing...........'
 sleep 1
 cd ~
-/bin/openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /opt/cert/key-selfsigned.pem -out /opt/cert/cert-selfsigned.pem -subj "/C=Id/ST=DKI Jakarta/L=Jakarta/O=Ade Purnomo/OU=IT Department/CN=Port of Tanjung Priok" >> /dev/null 2>&1
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /opt/cert/key-selfsigned.pem -out /opt/cert/cert-selfsigned.pem -subj "/C=Id/ST=DKI Jakarta/L=Jakarta/O=Ade Purnomo/OU=IT Department/CN=Port of Tanjung Priok" >> /dev/null 2>&1
 /bin/cat /opt/cert/dhparam.pem | tee -a /opt/cert/cert-selfsigned.pem >> /dev/null 2>&1
 cd /opt/temp
 stop_spinner $?
