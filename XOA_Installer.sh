@@ -165,9 +165,9 @@ start_spinner 'Configure self sign ssl for xoa, please wait'
 sleep 1
 cd ~
 openssl dhparam -out /opt/cert/dhparam.pem 2048 >> /dev/null 2>&1
-/bin/cat /opt/cert/dhparam.pem | tee -a /opt/cert/cert-selfsigned.pem >> /dev/null 2>&1
 cd /opt/temp
 stop_spinner $?
+/bin/cat /opt/cert/dhparam.pem | tee -a /opt/cert/cert-selfsigned.pem >> /dev/null 2>&1
 echo "${kuning}..................................."
 echo "white list 80 on firewalld"
 /bin/firewall-cmd --zone=public --add-port=80/tcp --permanent 
