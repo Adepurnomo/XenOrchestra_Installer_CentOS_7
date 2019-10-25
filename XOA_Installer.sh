@@ -129,7 +129,7 @@ echo "attach banner :v"
 echo "${kuning}------------------------------------------------"
 sleep 2
 cd /root/
-/bin/git clone https://github.com/Adepurnomo/banner.git >> /dev/null 2>&1
+/bin/git clone -b master http://github.com/vatesfr/xen-orchestra >> /dev/null 2>&1
 \cp /root/banner/issue.net /etc
 /bin/chmod a+x /etc/issue.net
 cd /etc/ssh/ 	
@@ -182,7 +182,7 @@ echo "white list 80 on firewalld"
 /bin/firewall-cmd --zone=public --add-port=80/tcp --permanent 
 echo "white list 443 on firewalld"
 /bin/firewall-cmd --zone=public --add-port=443/tcp --permanent
-/bin/firewall-cmd --reload >> /dev/null 2>&1
+/bin/firewall-cmd --reload > /dev/null 2>&1
 /bin/systemctl daemon-reload > /dev/null 2>&1
 /bin/systemctl enable xo-server.service > /dev/null 2>&1
 /bin/systemctl start xo-server > /dev/null 2>&1
