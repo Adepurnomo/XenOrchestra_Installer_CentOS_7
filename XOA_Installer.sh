@@ -20,7 +20,7 @@ echo "${kuning}Please wait.."
 /bin/yum install epel-release curl -y > /dev/null 2>&1
 #yum update -y > /dev/null 2>&1
 #add repo node js
-mkdir -p /opt/temp
+-p /opt/temp
 curl -o /opt/temp/spinner.sh https://raw.githubusercontent.com/tlatsas/bash-spinner/master/spinner.sh >> /dev/null 2>&1
 chmod a+x /opt/temp/spinner.sh
 
@@ -67,29 +67,36 @@ echo "NPM version $npm"
 echo "Yarn package version $yarn"
 sleep 10
 echo "${kuning}..................................."
-echo "clone xoa from source ---_____----_____-----"
+echo "clone xoa from source ---_____----___"
 cd /opt/
 /usr/bin/git clone https://github.com/vatesfr/xen-orchestra >> /dev/null 2>&1
 # allow config restore
 sed -i 's/< 5/> 0/g' /opt/xen-orchestra/packages/xo-web/src/xo-app/settings/config/index.js
 echo "${kuning}..................................."
-echo "Build your XOA ..."
+echo "Build your XOA..."
 echo "${kuning}..................................."
-echo "${kuning}4 look activity build-XOA, open new screen then"
-echo "${kuning} paste tail -f 500 /opt/temp/yarn-build-xoa.log"
+echo "${kuning}4 look activity firs XOA, open new screen then"
+echo "${kuning}..................................."
+echo "${kuning} paste 'tail -f /opt/temp/yarn-xoa.log'"
+echo "${kuning}..................................."
 source "/opt/temp/spinner.sh"
-start_spinner ' Build XOA, please wait (take several minute...'
+start_spinner 'Firs yarn 4 xoa.., please wait (take several minute...'
 sleep 1
+cd ~
 cd /opt/xen-orchestra
-/usr/bin/yarn >> /dev/null 2>&1
-/usr/bin/yarn build >> /opt/temp/yarn-build-xoa.log
+/usr/bin/yarn >> /opt/temp/yarn-xoa.log 
 cd /opt/temp
 stop_spinner $?
-
+echo "${kuning}..................................."
+source "/opt/temp/spinner.sh"
+start_spinner 'Last yarn 4 xoa.., please wait (take several minute...'
+sleep 1
+cd /opt/xen-orchestra
+/usr/bin/yarn build >> /opt/temp/yarn-xoa.log 
+cd /opt/temp
+stop_spinner $?
 # configure xoa
-echo "${kuning}..................................."
 echo "--------------Configure xoa----------------"
-echo "${kuning}..................................."
 sleep 5
 cd /opt/xen-orchestra/packages/xo-server
 \cp sample.config.toml .xo-server.toml
@@ -120,9 +127,7 @@ cd /etc/ssh/
 /bin/chmod a+x /etc/ssh/sshd_config
 /bin/rm -rf /root/banner
 #Create service for xoa
-echo "${kuning}..................................."
-echo "........ write service on systemd ........."
-echo "${kuning}..................................."
+echo "........ write service on systemd .........."
 /bin/cat << EOF >> /etc/systemd/system/xo-server.service
 # Systemd service for XO-Server.
 [Unit]
@@ -147,24 +152,32 @@ mkdir /opt/cert
 /bin/chmod 700 /opt/cert
 
 source "/opt/temp/spinner.sh"
-start_spinner 'Configure self sign ssl for xoa, please wait'
+start_spinner 'Initializing...........'
 sleep 1
 cd ~
-openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /opt/cert/key-selfsigned.pem -out /opt/cert/cert-selfsigned.pem -subj "/C=Id/ST=DKI Jakarta/L=Jakarta/O=Ade Purnomo/OU=IT Department/CN=Port of Tanjung Priok" >> /dev/null 2>&1
-openssl dhparam -out /opt/cert/dhparam.pem 2048 >> /dev/null 2>&1
+/bin/openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /opt/cert/key-selfsigned.pem -out /opt/cert/cert-selfsigned.pem -subj "/C=Id/ST=DKI Jakarta/L=Jakarta/O=Ade Purnomo/OU=IT Department/CN=Port of Tanjung Priok" >> /dev/null 2>&1
 /bin/cat /opt/cert/dhparam.pem | tee -a /opt/cert/cert-selfsigned.pem >> /dev/null 2>&1
 cd /opt/temp
 stop_spinner $?
 
+source "/opt/temp/spinner.sh"
+start_spinner 'Configure self sign ssl for xoa, please wait'
+sleep 1
+cd ~
+openssl dhparam -out /opt/cert/dhparam.pem 2048 >> /dev/null 2>&1
+/bin/cat /opt/cert/dhparam.pem | tee -a /opt/cert/cert-selfsigned.pem >> /dev/null 2>&1
+cd /opt/temp
+stop_spinner $?
+echo "${kuning}..................................."
 echo "white list 80 on firewalld"
 /bin/firewall-cmd --zone=public --add-port=80/tcp --permanent 
 echo "white list 443 on firewalld"
 /bin/firewall-cmd --zone=public --add-port=443/tcp --permanent
-/bin/firewall-cmd --reload /dev/null 2>&1
+/bin/firewall-cmd --reload >> /dev/null 2>&1
 
 /bin/systemctl daemon-reload > /dev/null 2>&1
 /bin/systemctl enable xo-server.service && /bin/systemctl start xo-server >> /dev/null 2>&1
-
+rm -rf /opt/temp
 sleep 2
 echo "${kuning}+++++++++++++++++++++++++++"
 echo "${kuning}========="DONE"============"
