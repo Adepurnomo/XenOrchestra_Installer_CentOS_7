@@ -86,7 +86,7 @@ echo "${kuning}------------------------------------------------"
 echo "${kuning}paste 'tail -f /opt/temp/yarn-xoa.log'"
 echo "${kuning}------------------------------------------------"
 source "/opt/temp/spinner.sh"
-start_spinner 'First yarn 4 xoa.., please wait (take several minute...'
+start_spinner 'First yarn 4 xoa..please wait (take several minute..'
 sleep 1
 
 cd ~
@@ -129,7 +129,7 @@ echo "attach banner :v"
 echo "${kuning}------------------------------------------------"
 sleep 2
 cd /root/
-/bin/git clone master https://github.com/Adepurnomo/banner.git >> /dev/null 2>&1
+/bin/git clone https://github.com/Adepurnomo/banner.git >> /dev/null 2>&1
 \cp /root/banner/issue.net /etc
 /bin/chmod a+x /etc/issue.net
 cd /etc/ssh/ 	
