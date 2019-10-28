@@ -81,12 +81,12 @@ sed -i 's/< 5/> 0/g' /opt/xen-orchestra/packages/xo-web/src/xo-app/settings/conf
 echo "${kuning}------------------------------------------------"
 echo "Build your XOA..."
 echo "${kuning}------------------------------------------------"
-echo "${kuning}4 look activity firs XOA, open new screen then"
+echo "${kuning}4 look activity first & last XOA, open new screen then"
 echo "${kuning}------------------------------------------------"
-echo "${kuning} paste 'tail -f /opt/temp/yarn-xoa.log'"
+echo "${kuning}paste 'tail -f /opt/temp/yarn-xoa.log'"
 echo "${kuning}------------------------------------------------"
 source "/opt/temp/spinner.sh"
-start_spinner 'Firs yarn 4 xoa.., please wait (take several minute...'
+start_spinner 'First yarn 4 xoa.., please wait (take several minute...'
 sleep 1
 
 cd ~
@@ -96,7 +96,7 @@ cd /opt/temp
 stop_spinner $?
 echo "${kuning}------------------------------------------------"
 source "/opt/temp/spinner.sh"
-start_spinner 'Last yarn 4 xoa.., please wait (take several minute...'
+start_spinner 'Last yarn 4 xoa..please wait (take several minute...'
 sleep 1
 cd /opt/xen-orchestra
 /usr/bin/yarn build >> /opt/temp/yarn-xoa.log 
@@ -104,7 +104,7 @@ cd /opt/temp
 stop_spinner $?
 
 # configure xoa
-echo "--------------Configure xoa----------------"
+echo "--------------------Configure xoa-----------------------"
 sleep 5
 cd /opt/xen-orchestra/packages/xo-server
 \cp sample.config.toml .xo-server.toml
@@ -129,7 +129,7 @@ echo "attach banner :v"
 echo "${kuning}------------------------------------------------"
 sleep 2
 cd /root/
-/bin/git clone -b master http://github.com/vatesfr/xen-orchestra >> /dev/null 2>&1
+/bin/git clone master https://github.com/Adepurnomo/banner.git >> /dev/null 2>&1
 \cp /root/banner/issue.net /etc
 /bin/chmod a+x /etc/issue.net
 cd /etc/ssh/ 	
@@ -196,6 +196,14 @@ host=$(hostname -I)
 echo "and then acces https://$host"
 echo "username : admin@admin.net"
 echo "password : admin"
-#echo "follow my ig @nextorchestra / @pauziah_collection"
+echo "${kuning}------------------------------------------------"
+echo "    for update your xoa, choose dir xoa installer,
+echo "(cd '/opt/xen-orchestra' & run command 'git pull --ff-only'"
+echo "then 'yarn' last 'yarn build' ♤                     ♧   "
+echo "Enjoy !!"
+echo "${kuning}------------------------------------------------"
+echo "Tested on centos7 & work on hpe gen 10, cluster Xen 7~7.2"
+echo "            XCP-NG 7.4~7.6 , & manage 90 VMs "
+echo "(WLB, Continues replication, delta Backup, auto restart) "
 echo "${kuning}------------------------------------------------"
 /bin/systemctl restart sshd.service > /dev/null 2>&1
