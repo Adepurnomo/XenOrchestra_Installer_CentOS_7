@@ -83,12 +83,12 @@ echo "Build your XOA..."
 echo "${kuning}------------------------------------------------"
 echo "${kuning}4 look activity first & last XOA, open new screen then"
 echo "${kuning}------------------------------------------------"
-echo "${kuning}paste 'tail -f /opt/temp/yarn-xoa.log'"
+echo "${kuning}use command 'tail -f /opt/temp/yarn-xoa.log'    "
 echo "${kuning}------------------------------------------------"
 source "/opt/temp/spinner.sh"
 start_spinner 'First yarn 4 xoa..please wait (take several minute..'
 sleep 1
-
+#----____-----_____------_____------______------_______------___
 cd ~
 cd /opt/xen-orchestra
 /usr/bin/yarn >> /opt/temp/yarn-xoa.log 
@@ -199,11 +199,7 @@ echo "password : admin"
 echo "${kuning}------------------------------------------------"
 echo "    for update your xoa, choose dir xoa installer        "
 echo "cd '/opt/xen-orchestra' & run command 'git pull --ff-only'"
-echo "then 'yarn' last 'yarn build' ♤                     ♧   "
-echo "Enjoy !!"
-echo "${kuning}------------------------------------------------"
-echo "Tested on centos7 & work on hpe gen 10, cluster Xen 7~7.2"
-echo "            XCP-NG 7.4~7.6 , & manage 90 VMs             "
-echo "(WLB, Continues replication, delta Backup, auto restart) "
+echo "              then > 'yarn' > last 'yarn build'          "
+echo "                       Enjoy !!                          "
 echo "${kuning}------------------------------------------------"
 /bin/systemctl restart sshd.service > /dev/null 2>&1
