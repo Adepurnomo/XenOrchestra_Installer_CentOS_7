@@ -186,13 +186,15 @@ echo "white list 443 on firewalld"
 /bin/systemctl enable xo-server.service > /dev/null 2>&1
 /bin/systemctl start xo-server > /dev/null 2>&1
 
-echo "${kuning}------------------------------------------------"
-echo "${kuning}              Netdata Installer                 " 
+echo "${kuning}---------------------------------------------------"
+echo "${kuning}                Netdata Installer                  " 
+echo "${kuning}               -------------------                 "
 echo "${kuning}open new screen & use tail -f /opt/temp/netdata.log"
-echo "${kuning}------------------------------------------------"
+echo "${kuning}---------------------------------------------------"
 
+yum install Judy-devel autoconf autoconf-archive autogen automake gcc libmnl-devel libuuid-devel libuv-devel lz4-devel nmap-ncat openssl-devel zlib-devel git -y >> /dev/null 2>&1
 cd /opt
-git clone https://github.com/netdata/netdata.git >> /dev/null 2>&1
+git clone https://github.com/netdata/netdata.git > /dev/null 2>&1
 #put 0 to 1 (skip) question for installer netdata
 sed -i 's/TWAIT} -eq 0 /TWAIT} -eq 1 /g' /opt/netdata/netdata-installer.sh
 chmod a+x /opt/netdata/netdata-installer.sh
@@ -221,8 +223,11 @@ echo "${kuning}------------------------------------------------"
 echo "${kuning}and then acces Netdata https://$host:19999      "
 echo "${kuning}------------------------------------------------"
 echo "     for update your xoa, choose dir xoa installer       "
+echo "${kuning}------------------------------------------------"
 echo "cd /opt/xen-orchestra' & run command 'git pull --ff-only "
+echo "${kuning}------------------------------------------------"
 echo "            then > 'yarn' > last 'yarn build'            "
+echo "${kuning}------------------------------------------------"
 echo "                       Enjoy !!                          "
 echo "${kuning}------------------------------------------------"
 /bin/systemctl restart sshd.service > /dev/null 2>&1
