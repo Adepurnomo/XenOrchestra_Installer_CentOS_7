@@ -50,7 +50,7 @@ echo "${kuning}             Install vhd tools...               |"
 /bin/rpm -ivh https://forensics.cert.org/cert-forensics-tools-release-el7.rpm > /dev/null 2>&1
 /bin/sed -i 's/enabled=1/enabled=0/g' /etc/yum.repos.d/cert-forensics-tools.repo > /dev/null 2>&1
 /bin/yum --enablerepo=forensics install -y libvhdi-tools > /dev/null 2>&1
-echo "${kuning}             Install tool 4 xoa...              |"
+echo "${kuning}            Install tool 4 xoa...               |"
 echo "${kuning}------------------------------------------------|"
 sleep 1
 /bin/yum install gcc gcc-c++ make openssl-devel redis libpng-devel python36 git nfs-utils -y >> /dev/null 2>&1
@@ -69,9 +69,9 @@ echo "${kuning}------------------------------------------------|"
 node=$(node -v) 
 npm=$(npm -v)
 yarn=$(yarn --version)
-echo "${kuning}Node js version $node                         |"
-echo "${kuning}NPM version $npm                               |"
-echo "${kuning}Yarn package version $yarn                     |"
+echo "${kuning}       Node js version $node                  |"
+echo "${kuning}         NPM version $npm                      |"
+echo "${kuning}     Yarn package version $yarn                |"
 sleep 10
 echo "${kuning}------------------------------------------------|"
 echo "${kuning}           Clone xoa from source...             |"
@@ -86,6 +86,7 @@ echo "${kuning}------------------------------------------------|"
 echo "${kuning}       4 look activity first & last XOA         |"
 echo "${kuning}----------------------------------------------------^"
 echo "${kuning}open new screen, use 'tail -f /opt/temp/yarn-xoa.log|"
+echo "${kuning}                                                    |"
 echo "${kuning}----------------------------------------------------|"
 source "/opt/temp/spinner.sh"
 start_spinner 'First yarn 4 xoa..please wait (take several minute..> > >'
@@ -96,7 +97,7 @@ cd /opt/xen-orchestra
 /usr/bin/yarn >> /opt/temp/yarn-xoa.log 
 cd /opt/temp
 stop_spinner $?
-echo "${kuning}----------------------------------------------------|"
+echo "${kuning}----------------------------------------------------"
 source "/opt/temp/spinner.sh"
 start_spinner 'Last yarn 4 xoa..please wait (take several minute..> > >'
 sleep 1
@@ -164,14 +165,14 @@ sleep 2
 mkdir /opt/cert
 /bin/chmod 700 /opt/cert
 source "/opt/temp/spinner.sh"
-start_spinner 'Initializing...                                 |'
+start_spinner 'Initializing.................................> >'
 sleep 1
 cd ~
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /opt/cert/key-selfsigned.pem -out /opt/cert/cert-selfsigned.pem -subj "/C=Id/ST=DKI Jakarta/L=Jakarta/O=Ade Purnomo/OU=IT Department/CN=Port of Tanjung Priok" >> /dev/null 2>&1
 cd /opt/temp
 stop_spinner $?
 source "/opt/temp/spinner.sh"
-start_spinner 'Configure self sign ssl for xoa, please wait....|'
+start_spinner 'Configure self sign ssl for xoa, please wait..> >'
 sleep 1
 cd ~
 openssl dhparam -out /opt/cert/dhparam.pem 2048 >> /dev/null 2>&1
@@ -203,7 +204,7 @@ git clone https://github.com/netdata/netdata.git > /dev/null 2>&1
 sed -i 's/TWAIT} -eq 0 /TWAIT} -eq 1 /g' /opt/netdata/netdata-installer.sh
 chmod a+x /opt/netdata/netdata-installer.sh
 source "/opt/temp/spinner.sh"
-start_spinner 'Installing netdata, please wait (a minut..> > >'
+start_spinner 'Installing netdata, please wait (a minut..       > > >'
 sleep 1
 cd /opt/netdata/
 ./netdata-installer.sh > /dev/null 2>&1 
@@ -213,18 +214,18 @@ stop_spinner $?
 cd ~
 servis=$(systemctl status netdata | grep running)
 echo "${kuning}------------------------------------------------^"
-echo "${kuning}Netdata status..       ${hijau}$servis          |"
+echo "${kuning}Netdata status..${hijau}$servis                 |"
 sleep 10
 
 echo "${kuning}------------------------------------------------|"
 echo "${kuning}                     DONE                       |" 
 echo "${kuning}------------------------------------------------|"
 host=$(hostname -I)
-echo "${kuning}and then acces XOA https://$host                |"
+echo "${kuning}and then acces XOA https://$host                 "
 echo "${kuning}username : admin@admin.net                      |"
 echo "${kuning}password : admin                                |"
 echo "${kuning}------------------------------------------------|"
-echo "${kuning}4 acces Netdata http://$host:19999              |"
+echo "${kuning}4 acces Netdata http://$host:19999               "
 echo "${kuning}------------------------------------------------|"
 echo "${kuning}                  Enjoy !!                      |"
 echo "${kuning}------------------------------------------------|"
