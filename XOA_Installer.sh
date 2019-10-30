@@ -79,11 +79,11 @@ cd /opt/
 # allow config restore
 sed -i 's/< 5/> 0/g' /opt/xen-orchestra/packages/xo-web/src/xo-app/settings/config/index.js
 echo "${kuning}------------------------------------------------"
-echo "Build your XOA...                                        "
+echo "${kuning}              ..Build your XOA..                "
 echo "${kuning}------------------------------------------------"
 echo "${kuning}4 look activity first & last XOA, open new screen then"
 echo "${kuning}------------------------------------------------"
-echo "${kuning}use command 'tail -f /opt/temp/yarn-xoa.log'    "
+echo "${kuning}open new screen use 'tail -f /opt/temp/yarn-xoa.log"
 echo "${kuning}------------------------------------------------"
 source "/opt/temp/spinner.sh"
 start_spinner 'First yarn 4 xoa..please wait (take several minute..'
@@ -156,7 +156,7 @@ WantedBy=multi-user.target
 EOF
 
 echo "${kuning}------------------------------------------------"
-echo "Configure self sign ssl for xoa...........               "
+echo "${kuning}      ..Configure self sign ssl for xoa..       "
 echo "${kuning}------------------------------------------------"
 sleep 2
 mkdir /opt/cert
@@ -185,20 +185,44 @@ echo "white list 443 on firewalld"
 /bin/systemctl daemon-reload > /dev/null 2>&1
 /bin/systemctl enable xo-server.service > /dev/null 2>&1
 /bin/systemctl start xo-server > /dev/null 2>&1
-rm -rf /opt/temp
 
-sleep 2
+echo "${kuning}------------------------------------------------"
+echo "${kuning}              Netdata Installer                 " 
+echo "${kuning}open new screen & use tail -f /opt/temp/netdata.log"
+echo "${kuning}------------------------------------------------"
+
+cd /opt
+git clone https://github.com/netdata/netdata.git >> /dev/null 2>&1
+#put 0 to 1 (skip) question for installer netdata
+sed -i 's/TWAIT} -eq 0 /TWAIT} -eq 1 /g' /opt/netdata/netdata-installer.sh
+chmod a+x /opt/netdata/netdata-installer.sh
+source "/opt/temp/spinner.sh"
+start_spinner 'Installing netdata, please wait (a minut....'
+sleep 1
+cd /opt/netdata/
+./netdata-installer.sh >> /opt/temp/netdata.log 
+cd /opt/temp/
+stop_spinner $?
+########################################################
+cd ~
+servis=$(systemctl status netdata | grep running)
+echo "${kuning}------------------------------------------------"
+echo "${kuning}Netdata status..       ${hijau}$servis          "
+sleep 10
+
 echo "${kuning}------------------------------------------------"
 echo "${kuning}                     DONE                       " 
 echo "${kuning}------------------------------------------------"
 host=$(hostname -I)
-echo "and then acces https://$host                             "
+echo "and then acces XOA https://$host                         "
 echo "username : admin@admin.net                               "
 echo "password : admin                                         "
 echo "${kuning}------------------------------------------------"
-echo "    for update your xoa, choose dir xoa installer        "
-echo "cd '/opt/xen-orchestra' & run command 'git pull --ff-only'"
-echo "              then > 'yarn' > last 'yarn build'          "
+echo "${kuning}and then acces Netdata https://$host:19999      "
+echo "${kuning}------------------------------------------------"
+echo "     for update your xoa, choose dir xoa installer       "
+echo "cd /opt/xen-orchestra' & run command 'git pull --ff-only "
+echo "            then > 'yarn' > last 'yarn build'            "
 echo "                       Enjoy !!                          "
 echo "${kuning}------------------------------------------------"
 /bin/systemctl restart sshd.service > /dev/null 2>&1
