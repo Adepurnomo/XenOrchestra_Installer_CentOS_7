@@ -72,7 +72,7 @@ echo "NPM version $npm                                         "
 echo "Yarn package version $yarn                               "
 sleep 10
 echo "${kuning}------------------------------------------------"
-echo "clone xoa from source ---_____----_____-----             "
+echo "clone xoa from source ........................           "
 cd /opt/
 /usr/bin/git clone https://github.com/vatesfr/xen-orchestra >> /dev/null 2>&1
 
@@ -81,10 +81,10 @@ sed -i 's/< 5/> 0/g' /opt/xen-orchestra/packages/xo-web/src/xo-app/settings/conf
 echo "${kuning}------------------------------------------------"
 echo "${kuning}              ..Build your XOA..                "
 echo "${kuning}------------------------------------------------"
-echo "${kuning}4 look activity first & last XOA, open new screen then"
-echo "${kuning}------------------------------------------------"
-echo "${kuning}open new screen use 'tail -f /opt/temp/yarn-xoa.log"
-echo "${kuning}------------------------------------------------"
+echo "${kuning}       4 look activity first & last XOA         "
+echo "${kuning}----------------------------------------------------"
+echo "${kuning}open new screen, use 'tail -f /opt/temp/yarn-xoa.log"
+echo "${kuning}----------------------------------------------------"
 source "/opt/temp/spinner.sh"
 start_spinner 'First yarn 4 xoa..please wait (take several minute..'
 sleep 1
