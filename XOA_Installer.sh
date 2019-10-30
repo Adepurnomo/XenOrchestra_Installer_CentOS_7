@@ -12,7 +12,7 @@ echo "${hijau}#################################################^"
 echo "${merah}    Min spec for cluster, backup, continues      |"
 echo "${merah}     replication (DC-DR),load balancing etc,     |"
 echo "${merah}    for XenServer/CitrixHyprrvisor/XCP-NG        |"
-echo "${merah}    Like XCP, use guest tools from citrix xen    |"
+echo "${merah}   Like XCP, use guest tools from citrix xen     |"
 echo "${merah}      4vCPU, 16GB RAM, NIC 10G or Bounded        |"
 echo "${merah}#################################################"
 tuned-adm profile network-throughput
@@ -194,7 +194,7 @@ echo "${kuning}         white list 19999 on firewalld          |"
 echo "${kuning}---------------------------------------------------^"
 echo "${kuning}                Netdata Installer                  |" 
 echo "${kuning}               -------------------                 |"
-echo "${kuning}open new screen & use tail -f /opt/temp/netdata.log|"
+echo "${kuning}                                                   |"
 echo "${kuning}---------------------------------------------------|"
 
 yum install Judy-devel autoconf autoconf-archive autogen automake gcc libmnl-devel libuuid-devel libuv-devel lz4-devel nmap-ncat openssl-devel zlib-devel git -y >> /dev/null 2>&1
