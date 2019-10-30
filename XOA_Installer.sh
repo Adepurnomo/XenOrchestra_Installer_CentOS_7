@@ -89,7 +89,7 @@ echo "${kuning}|open new screen, use 'tail -f /opt/temp/yarn-xoa.log|"
 echo "${kuning}|                                                    |"
 echo "${kuning}|----------------------------------------------------|"
 source "/opt/temp/spinner.sh"
-start_spinner 'First yarn 4 xoa..please wait (take several minute..> > >'
+start_spinner '|First yarn 4 xoa..please wait (take several minute.. > > >'
 sleep 1
 
 cd ~
@@ -99,7 +99,7 @@ cd /opt/temp
 stop_spinner $?
 echo "${kuning}----------------------------------------------------"
 source "/opt/temp/spinner.sh"
-start_spinner 'Last yarn 4 xoa..please wait (take several minute.. > > >'
+start_spinner '|Last yarn 4 xoa..please wait (take several minute..  > > >'
 sleep 1
 cd /opt/xen-orchestra
 /usr/bin/yarn build >> /opt/temp/yarn-xoa.log 
@@ -107,7 +107,7 @@ cd /opt/temp
 stop_spinner $?
 
 # configure xoa
-echo "${kuning}^----------------Configure XOA------------------^"
+echo "${kuning}|^----------------Configure XOA------------------^"
 sleep 5
 cd /opt/xen-orchestra/packages/xo-server
 \cp sample.config.toml .xo-server.toml
@@ -120,7 +120,7 @@ chmod a+x /opt/xen-orchestra/packages/xo-server/.xo-server.toml
 /bin/sed -i "s|# key = './key.pem'|key = '/opt/cert/key-selfsigned.pem'|" .xo-server.toml
 
 # create node
-echo "${kuning}|               Create node ...                  |"
+echo "${kuning}|                  Create node ...               |"
 echo "${kuning}|------------------------------------------------|"
 sleep 2
 mkdir -p /usr/local/lib/node_modules/
