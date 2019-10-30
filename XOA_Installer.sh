@@ -4,13 +4,13 @@ clear
 kuning=$(tput setaf 3)
 hijau=$(tput setaf 2)
 echo "${hijau}#################################################"
-echo "${hijau}        Please run this scripts on SU !          /"
+echo "${hijau}        Please run this scripts on SU !          "
 sudo su -
-echo "${hijau}    Min spec for cluster, backup, continues      \"
-echo "${hijau}     replication (DC-DR),load balancing etc,     /"
-echo "${hijau}    for XenServer/CitrixHyprrvisor/XCP-NG        \"
-echo "${hijau}    Like XCP, use guest tools from citrix xen    /"
-echo "${hijau}      4vCPU, 16GB RAM, NIC 10G or Bounded        \"
+echo "${hijau}    Min spec for cluster, backup, continues      "
+echo "${hijau}     replication (DC-DR),load balancing etc,     "
+echo "${hijau}    for XenServer/CitrixHyprrvisor/XCP-NG        "
+echo "${hijau}    Like XCP, use guest tools from citrix xen    "
+echo "${hijau}      4vCPU, 16GB RAM, NIC 10G or Bounded        "
 echo "${hijau}#################################################"
 tuned-adm profile network-throughput
 hostnamectl set-hostname XOA
