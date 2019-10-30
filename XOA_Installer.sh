@@ -94,7 +94,7 @@ cd /opt/xen-orchestra
 /usr/bin/yarn >> /opt/temp/yarn-xoa.log 
 cd /opt/temp
 stop_spinner $?
-echo "${kuning}------------------------------------------------"
+echo "${kuning}----------------------------------------------------"
 source "/opt/temp/spinner.sh"
 start_spinner 'Last yarn 4 xoa..please wait (take several minute...'
 sleep 1
@@ -118,8 +118,8 @@ chmod a+x /opt/xen-orchestra/packages/xo-server/.xo-server.toml
 
 # create node
 clear
-echo "Create node ..."
-echo "${kuning}------------------------------------------------"
+echo "                       ... Create node ...                   "
+echo "${kuning}----------------------------------------------------"
 sleep 2
 mkdir -p /usr/local/lib/node_modules/
 /bin/ln -s /opt/xen-orchestra/packages/xo-server-* /usr/local/lib/node_modules/
