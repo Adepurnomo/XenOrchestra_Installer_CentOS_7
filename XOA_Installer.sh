@@ -4,15 +4,14 @@ clear
 kuning=$(tput setaf 3)
 hijau=$(tput setaf 2)
 echo "${hijau}#################################################"
-echo "${hijau}        Please run this scripts on SU !          "
+echo "${hijau}        Please run this scripts on SU !          /"
 sudo su -
-echo "${hijau}    Min spec for cluster, backup, continues      "
-echo "${hijau}     replication (DC-DR),load balancing etc,     "
-echo "${hijau}    for XenServer/CitrixHyprrvisor/XCP-NG        "
-echo "${hijau}    Like XCP, use guest tools from citrix xen    "
-echo "${hijau}      4vCPU, 16GB RAM, NIC 10G or Bounded        "
+echo "${hijau}    Min spec for cluster, backup, continues      \"
+echo "${hijau}     replication (DC-DR),load balancing etc,     /"
+echo "${hijau}    for XenServer/CitrixHyprrvisor/XCP-NG        \"
+echo "${hijau}    Like XCP, use guest tools from citrix xen    /"
+echo "${hijau}      4vCPU, 16GB RAM, NIC 10G or Bounded        \"
 echo "${hijau}#################################################"
-
 tuned-adm profile network-throughput
 hostnamectl set-hostname XOA
 echo "${kuning}------------------------------------------------^"
@@ -26,34 +25,34 @@ sudo mkdir -p /opt/temp
 sudo curl -o /opt/temp/spinner.sh https://raw.githubusercontent.com/tlatsas/bash-spinner/master/spinner.sh >> /dev/null 2>&1
 sudo chmod a+x /opt/temp/spinner.sh
 echo "${kuning}------------------------------------------------|"
-echo "add repo nodeJS v8.xx...                                 "
+echo "${kuning}add repo nodeJS v8.xx...                        |"
 curl -s -L https://rpm.nodesource.com/setup_8.x | bash - > /dev/null 2>&1
 curl -s -o /etc/yum.repos.d/yarn.repo https://dl.yarnpkg.com/rpm/yarn.repo > /dev/null 2>&1
 
 # Node
 echo "${kuning}------------------------------------------------|"
-echo "install nodeJS....                                       |"
-echo "Please wait......                                        |"
+echo "${kuning}install nodeJS....                              |"
+echo "${kuning}Please wait......                               |"
 sleep 1
 /bin/yum install nodejs -y  > /dev/null 2>&1
 # install yarn package
 echo "${kuning}------------------------------------------------|"
-echo "Install yarn package....                                 |"
+echo "${kuning}Install yarn package....                        |"
 sleep 2
 /bin/yum install yarn -y > /dev/null 2>&1
 
 # install lib vhd tools
 sleep 1
 echo "${kuning}------------------------------------------------|"
-echo "Install vhd tools...."
+echo "${kuning}Install vhd tools....                           |"
 /bin/rpm -ivh https://forensics.cert.org/cert-forensics-tools-release-el7.rpm > /dev/null 2>&1
 /bin/sed -i 's/enabled=1/enabled=0/g' /etc/yum.repos.d/cert-forensics-tools.repo > /dev/null 2>&1
 /bin/yum --enablerepo=forensics install -y libvhdi-tools > /dev/null 2>&1
-echo "Install tool 4 xoa..."
+echo "${kuning}Install tool 4 xoa...                           |"
 echo "${kuning}------------------------------------------------|"
 sleep 1
 /bin/yum install gcc gcc-c++ make openssl-devel redis libpng-devel python36 git nfs-utils -y >> /dev/null 2>&1
-echo "Install Open SSL.."
+echo "${kuning}Install Open SSL..                              |"
 /bin/yum install mod_ssl -y > /dev/null 2>&1
 
 # enable service redis etc 
@@ -63,17 +62,17 @@ echo "${kuning}------------------------------------------------|"
 /bin/systemctl start redis > /dev/null 2>&1
 /bin/systemctl enable rpcbind > /dev/null 2>&1
 /bin/systemctl start rpcbind > /dev/null 2>&1
-echo "Tools succes install"
+echo "${kuning}Tools succes install                            |"
 echo "${kuning}------------------------------------------------|"
 node=$(node -v) 
 npm=$(npm -v)
 yarn=$(yarn --version)
-echo "Node js version $node                                    |"
-echo "NPM version $npm                                         |"
-echo "Yarn package version $yarn                               |"
+echo "${kuning}Node js version $node                           |"
+echo "${kuning}NPM version $npm                                |"
+echo "${kuning}Yarn package version $yarn                      |"
 sleep 10
 echo "${kuning}------------------------------------------------|"
-echo "clone xoa from source ........................           |"
+echo "${kuning}clone xoa from source ........................  |"
 cd /opt/
 /usr/bin/git clone https://github.com/vatesfr/xen-orchestra >> /dev/null 2>&1
 
@@ -87,7 +86,7 @@ echo "${kuning}----------------------------------------------------^"
 echo "${kuning}open new screen, use 'tail -f /opt/temp/yarn-xoa.log|"
 echo "${kuning}----------------------------------------------------|"
 source "/opt/temp/spinner.sh"
-start_spinner 'First yarn 4 xoa..please wait (take several minute..'
+start_spinner 'First yarn 4 xoa..please wait (take several minute..|'
 sleep 1
 
 cd ~
@@ -105,7 +104,7 @@ cd /opt/temp
 stop_spinner $?
 
 # configure xoa
-echo "--------------------Configure XOA-----------------------^"
+echo "${kuning}----------------Configure XOA------------------^"
 sleep 5
 cd /opt/xen-orchestra/packages/xo-server
 \cp sample.config.toml .xo-server.toml
@@ -119,14 +118,14 @@ chmod a+x /opt/xen-orchestra/packages/xo-server/.xo-server.toml
 
 # create node
 clear
-echo "                       ... Create node ...                   "
+echo "${kuning}          ... Create node ...                   |"
 echo "${kuning}------------------------------------------------|"
 sleep 2
 mkdir -p /usr/local/lib/node_modules/
 /bin/ln -s /opt/xen-orchestra/packages/xo-server-* /usr/local/lib/node_modules/
 /bin/rm -rf /etc/systemd/system/xo-server.service
 # Banner
-echo "attach banner :v"
+echo "${kuning}attach banner                                   |"
 echo "${kuning}------------------------------------------------|"
 sleep 2
 cd /root/
@@ -163,7 +162,7 @@ sleep 2
 mkdir /opt/cert
 /bin/chmod 700 /opt/cert
 source "/opt/temp/spinner.sh"
-start_spinner 'Initializing...........'
+start_spinner 'Initializing...........                         |'
 sleep 1
 cd ~
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /opt/cert/key-selfsigned.pem -out /opt/cert/cert-selfsigned.pem -subj "/C=Id/ST=DKI Jakarta/L=Jakarta/O=Ade Purnomo/OU=IT Department/CN=Port of Tanjung Priok" >> /dev/null 2>&1
@@ -178,11 +177,11 @@ cd /opt/temp
 stop_spinner $?
 /bin/cat /opt/cert/dhparam.pem | tee -a /opt/cert/cert-selfsigned.pem >> /dev/null 2>&1
 echo "${kuning}------------------------------------------------|"
-echo "white list 80 on firewalld"
+echo "${kuning}white list 80 on firewalld                      |"
 /bin/firewall-cmd --zone=public --add-port=80/tcp --permanent 
-echo "white list 443 on firewalld"
+echo "${kuning}white list 443 on firewalld                     |"
 /bin/firewall-cmd --zone=public --add-port=443/tcp --permanent
-echo "white list 19999 on firewalld"
+echo "${kuning}white list 19999 on firewalld                   |"
 /bin/firewall-cmd --zone=public --add-port=19999/tcp --permanent
 /bin/firewall-cmd --reload > /dev/null 2>&1
 /bin/systemctl daemon-reload > /dev/null 2>&1
@@ -205,7 +204,7 @@ source "/opt/temp/spinner.sh"
 start_spinner 'Installing netdata, please wait (a minut....    ^'
 sleep 1
 cd /opt/netdata/
-./netdata-installer.sh >> /opt/temp/netdata.log 
+./netdata-installer.sh > /opt/temp/netdata.log 
 cd /opt/temp/
 stop_spinner $?
 ########################################################
