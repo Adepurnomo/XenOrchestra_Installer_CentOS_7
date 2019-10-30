@@ -1,6 +1,6 @@
 #!/bin/bash
 ##
-echo "               Please run this scripts on SU !           "
+echo "             Please run this scripts on SU !             "
 sleep 5
 sudo su -
 clear
@@ -8,11 +8,11 @@ merah=$(tput setaf 1)
 kuning=$(tput setaf 3)
 hijau=$(tput setaf 2)
 echo "${hijau}#################################################^"
-echo "${merah}    Min spec for cluster, backup, continues      |"
-echo "${merah}     replication (DC-DR),load balancing etc,     |"
-echo "${merah}    for XenServer/CitrixHyprrvisor/XCP-NG        |"
-echo "${merah}   Like XCP, use guest tools from citrix xen     |"
-echo "${merah}      4vCPU, 16GB RAM, NIC 10G or Bounded        |"
+echo "${merah}|   Min spec for cluster, backup, continues      |"
+echo "${merah}|    replication (DC-DR),load balancing etc,     |"
+echo "${merah}|   for XenServer/CitrixHyprrvisor/XCP-NG        |"
+echo "${merah}|  Like XCP, use guest tools from citrix xen     |"
+echo "${merah}|     4vCPU, 16GB RAM, NIC 10G or Bounded        |"
 echo "${merah}#################################################"
 tuned-adm profile network-throughput
 hostnamectl set-hostname XOA
@@ -69,9 +69,9 @@ echo "${kuning}------------------------------------------------|"
 node=$(node -v) 
 npm=$(npm -v)
 yarn=$(yarn --version)
-echo "${kuning}       Node js version $node                  |"
-echo "${kuning}         NPM version $npm                      |"
-echo "${kuning}     Yarn package version $yarn                |"
+echo "${kuning}            Node js version $node             |"
+echo "${kuning}              NPM version $npm                 |"
+echo "${kuning}          Yarn package version $yarn           |"
 sleep 10
 echo "${kuning}------------------------------------------------|"
 echo "${kuning}           Clone xoa from source...             |"
@@ -120,7 +120,6 @@ chmod a+x /opt/xen-orchestra/packages/xo-server/.xo-server.toml
 /bin/sed -i "s|# key = './key.pem'|key = '/opt/cert/key-selfsigned.pem'|" .xo-server.toml
 
 # create node
-clear
 echo "${kuning}               Create node ...                  |"
 echo "${kuning}------------------------------------------------|"
 sleep 2
@@ -139,11 +138,9 @@ cd /etc/ssh/
 /bin/sed -i "s|#Banner none|Banner /etc/issue.net|" sshd_config
 /bin/chmod a+x /etc/ssh/sshd_config
 /bin/rm -rf /root/banner
-#Create service for xoa
+
 echo "${kuning}        ~write service on systemd~              |"
 /bin/cat << EOF >> /etc/systemd/system/xo-server.service
-
-# Systemd service for XO-Server.
 [Unit]
 Description= XO Server
 After=network-online.target
@@ -204,7 +201,7 @@ git clone https://github.com/netdata/netdata.git > /dev/null 2>&1
 sed -i 's/TWAIT} -eq 0 /TWAIT} -eq 1 /g' /opt/netdata/netdata-installer.sh
 chmod a+x /opt/netdata/netdata-installer.sh
 source "/opt/temp/spinner.sh"
-start_spinner 'Installing netdata, please wait (a minut..       > > >'
+start_spinner 'Installing netdata, please wait (a minut..    > >'
 sleep 1
 cd /opt/netdata/
 ./netdata-installer.sh > /dev/null 2>&1 
