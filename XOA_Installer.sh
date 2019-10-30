@@ -1,11 +1,11 @@
 #!/bin/bash
 ##
-Merah = $(tput setaf 1)
-echo "${hijau}       Please run this scripts on SU !           "
+merah = $(tput setaf 1)
+echo "${merah}       Please run this scripts on SU !           "
 sleep 10
 sudo su -
 clear
-Merah = $(tput setaf 1)
+merah = $(tput setaf 1)
 kuning=$(tput setaf 3)
 hijau=$(tput setaf 2)
 echo "${hijau}#################################################^"
