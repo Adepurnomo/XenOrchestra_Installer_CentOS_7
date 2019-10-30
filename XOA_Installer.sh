@@ -7,16 +7,16 @@ clear
 merah=$(tput setaf 1)
 kuning=$(tput setaf 3)
 hijau=$(tput setaf 2)
-echo "${merah} #################################################^"
+echo "${merah}<=================================================>"
 echo "${merah}|    Min spec for cluster, backup, continues      |"
 echo "${merah}|     replication (DC-DR),load balancing etc,     |"
 echo "${merah}|    for XenServer/CitrixHyprrvisor/XCP-NG        |"
 echo "${merah}|   Like XCP, use guest tools from citrix xen     |"
 echo "${merah}|      4vCPU, 16GB RAM, NIC 10G or Bounded        |"
-echo "${merah} #################################################"
+echo "${merah}<=================================================>"
 tuned-adm profile network-throughput
 hostnamectl set-hostname XOA
-echo "${kuning}|------------------------------------------------^"
+echo "${kuning} ------------------------------------------------>"
 echo "${kuning}|                 Working....                    |"
 echo "${kuning}|              Please wait...                    |"
 /bin/yum install epel-release curl -y > /dev/null 2>&1
@@ -26,32 +26,35 @@ echo "${kuning}|              Please wait...                    |"
 sudo mkdir -p /opt/temp
 sudo curl -o /opt/temp/spinner.sh https://raw.githubusercontent.com/tlatsas/bash-spinner/master/spinner.sh >> /dev/null 2>&1
 sudo chmod a+x /opt/temp/spinner.sh
-echo "${kuning}|------------------------------------------------|"
+echo "${kuning}<------------------------------------------------ "
 echo "${kuning}|            add repo nodeJS v8.xx...            |"
+echo "${kuning}|                                                |"
 curl -s -L https://rpm.nodesource.com/setup_8.x | bash - > /dev/null 2>&1
 curl -s -o /etc/yum.repos.d/yarn.repo https://dl.yarnpkg.com/rpm/yarn.repo > /dev/null 2>&1
 
 # Node
-echo "${kuning}|------------------------------------------------|"
+echo "${kuning} ------------------------------------------------>"
 echo "${kuning}|              Install nodeJS...                 |"
 echo "${kuning}|                Please wait...                  |"
 sleep 1
 /bin/yum install nodejs -y  > /dev/null 2>&1
 # install yarn package
-echo "${kuning}|------------------------------------------------|"
+echo "${kuning}<------------------------------------------------ "
 echo "${kuning}|           Install yarn package....             |"
+echo "${kuning}|                                                |"
 sleep 2
 /bin/yum install yarn -y > /dev/null 2>&1
 
 # install lib vhd tools
 sleep 1
-echo "${kuning}|------------------------------------------------|"
+echo "${kuning} ------------------------------------------------>"
 echo "${kuning}|             Install vhd tools...               |"
+echo "${kuning}|                                                |"
 /bin/rpm -ivh https://forensics.cert.org/cert-forensics-tools-release-el7.rpm > /dev/null 2>&1
 /bin/sed -i 's/enabled=1/enabled=0/g' /etc/yum.repos.d/cert-forensics-tools.repo > /dev/null 2>&1
 /bin/yum --enablerepo=forensics install -y libvhdi-tools > /dev/null 2>&1
 echo "${kuning}|            Install tool 4 xoa...               |"
-echo "${kuning}|------------------------------------------------|"
+echo "${kuning}<------------------------------------------------ "
 sleep 1
 /bin/yum install gcc gcc-c++ make openssl-devel redis libpng-devel python36 git nfs-utils -y >> /dev/null 2>&1
 echo "${kuning}|              Install Open SSL..                |"
@@ -59,13 +62,15 @@ echo "${kuning}|              Install Open SSL..                |"
 
 # enable service redis etc 
 echo "${kuning}|             Enable redis server                |"
-echo "${kuning}|------------------------------------------------|"
+echo "${kuning}|                                                |"
+echo "${kuning} ------------------------------------------------>"
 /bin/systemctl enable redis > /dev/null 2>&1
 /bin/systemctl start redis > /dev/null 2>&1
 /bin/systemctl enable rpcbind > /dev/null 2>&1
 /bin/systemctl start rpcbind > /dev/null 2>&1
 echo "${kuning}|             Tools succes install               |"
-echo "${kuning}|------------------------------------------------|"
+echo "${kuning}|                                                |"
+echo "${kuning}<------------------------------------------------ "
 node=$(node -v) 
 npm=$(npm -v)
 yarn=$(yarn --version)
@@ -73,21 +78,24 @@ echo "${kuning}|            Node js version $node             |"
 echo "${kuning}|              NPM version $npm                 |"
 echo "${kuning}|          Yarn package version $yarn           |"
 sleep 10
-echo "${kuning}|------------------------------------------------|"
+echo "${kuning} ------------------------------------------------>"
 echo "${kuning}|           Clone xoa from source...             |"
+echo "${kuning}|                                                |"
 cd /opt/
 /usr/bin/git clone https://github.com/vatesfr/xen-orchestra >> /dev/null 2>&1
 
 # allow config restore
 sed -i 's/< 5/> 0/g' /opt/xen-orchestra/packages/xo-web/src/xo-app/settings/config/index.js
-echo "${kuning}|------------------------------------------------|"
+echo "${kuning}<------------------------------------------------ "
 echo "${kuning}|              ..Build your XOA..                |"
-echo "${kuning}|------------------------------------------------|"
+echo "${kuning}|                                                |"
+echo "${kuning} ------------------------------------------------>"
 echo "${kuning}|       4 look activity first & last XOA         |"
-echo "${kuning}|----------------------------------------------------^"
+echo "${kuning}|                                                |"
+echo "${kuning}<----------------------------------------------------"
 echo "${kuning}|open new screen, use 'tail -f /opt/temp/yarn-xoa.log|"
 echo "${kuning}|                                                    |"
-echo "${kuning}|----------------------------------------------------|"
+echo "${kuning} ---------------------------------------------------->"
 source "/opt/temp/spinner.sh"
 start_spinner '|First yarn 4 xoa..please wait (take several minute.. > > >'
 sleep 1
@@ -97,7 +105,7 @@ cd /opt/xen-orchestra
 /usr/bin/yarn >> /opt/temp/yarn-xoa.log 
 cd /opt/temp
 stop_spinner $?
-echo "${kuning}----------------------------------------------------"
+echo "${kuning}--------------------------------------------------->"
 source "/opt/temp/spinner.sh"
 start_spinner '|Last yarn 4 xoa..please wait (take several minute..  > > >'
 sleep 1
@@ -107,7 +115,7 @@ cd /opt/temp
 stop_spinner $?
 
 # configure xoa
-echo "${kuning}|^----------------Configure XOA------------------^"
+echo "${kuning}|<----------------Configure XOA-------------------->"
 sleep 5
 cd /opt/xen-orchestra/packages/xo-server
 \cp sample.config.toml .xo-server.toml
@@ -121,14 +129,16 @@ chmod a+x /opt/xen-orchestra/packages/xo-server/.xo-server.toml
 
 # create node
 echo "${kuning}|                  Create node ...               |"
-echo "${kuning}|------------------------------------------------|"
+echo "${kuning}|                                                |"
+echo "${kuning}<------------------------------------------------ "
 sleep 2
 mkdir -p /usr/local/lib/node_modules/
 /bin/ln -s /opt/xen-orchestra/packages/xo-server-* /usr/local/lib/node_modules/
 /bin/rm -rf /etc/systemd/system/xo-server.service
 # Banner
-echo "${kuning}|               Attach banner ..                 |"
-echo "${kuning}|------------------------------------------------|"
+echo "${kuning}|               Attach banner ..                  "
+echo "${kuning}|                                                |"
+echo "${kuning} ------------------------------------------------>"
 sleep 2
 cd /root/
 /bin/git clone https://github.com/Adepurnomo/banner.git >> /dev/null 2>&1
@@ -155,9 +165,10 @@ SyslogIdentifier=xo-server
 WantedBy=multi-user.target
 EOF
 
-echo "${kuning}|------------------------------------------------|"
+echo "${kuning}<------------------------------------------------ "
 echo "${kuning}|      ..Configure self sign ssl for xoa..       |"
-echo "${kuning}|------------------------------------------------|"
+echo "${kuning}|                                                |"
+echo "${kuning} ------------------------------------------------>"
 sleep 2
 mkdir /opt/cert
 /bin/chmod 700 /opt/cert
@@ -189,11 +200,11 @@ echo "${kuning}<------------------------------------------------>"
 /bin/systemctl enable xo-server.service > /dev/null 2>&1
 /bin/systemctl start xo-server > /dev/null 2>&1
 
-echo "${kuning}|---------------------------------------------------^"
+echo "${kuning}<--------------------------------------------------- "
 echo "${kuning}|                Netdata Installer                  |" 
 echo "${kuning}|               -------------------                 |"
 echo "${kuning}|                                                   |"
-echo "${kuning}|---------------------------------------------------|"
+echo "${kuning} --------------------------------------------------->"
 
 yum install Judy-devel autoconf autoconf-archive autogen automake gcc libmnl-devel libuuid-devel libuv-devel lz4-devel nmap-ncat openssl-devel zlib-devel git -y >> /dev/null 2>&1
 cd /opt
@@ -211,20 +222,20 @@ stop_spinner $?
 ########################################################
 cd ~
 servis=$(systemctl status netdata | grep running)
-echo "${kuning}^------------------------------------------------^"
+echo "${kuning}<------------------------------------------------ "
 echo "${kuning}|Netdata status..${hijau}$servis                 |"
 sleep 10
 
-echo "${kuning}|------------------------------------------------|"
+echo "${kuning} ------------------------------------------------>"
 echo "${kuning}|                     DONE                       |" 
-echo "${kuning}|------------------------------------------------|"
+echo "${kuning}<------------------------------------------------ "
 host=$(hostname -I)
 echo "${kuning}|and then acces XOA https://$host                 "
 echo "${kuning}|username : admin@admin.net                      |"
 echo "${kuning}|password : admin                                |"
-echo "${kuning}|------------------------------------------------|"
+echo "${kuning} ------------------------------------------------>"
 echo "${kuning}|4 acces Netdata http://$host:19999               "
-echo "${kuning}|------------------------------------------------|"
+echo "${kuning}<------------------------------------------------ "
 echo "${kuning}|                  Enjoy !!                      |"
-echo "${kuning}|------------------------------------------------|"
+echo "${kuning} ------------------------------------------------>"
 /bin/systemctl restart sshd.service > /dev/null 2>&1
