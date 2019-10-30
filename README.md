@@ -5,4 +5,4 @@
 
 Use curl 
 
-run --> curl -sL https://raw.githubusercontent.com/Adepurnomo/XenOrchestra_Installer_CentOS/master/XOA_Installer.sh | bash
+run --> curl -sL https://raw.githubusercontent.com/Adepurnomo/XenOrchestra_Installer_CentOS_7/master/XOA_Installer.sh | bash
