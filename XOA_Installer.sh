@@ -1,7 +1,6 @@
 #!/bin/bash
 ##
-merah = $(tput setaf 1)
-echo "${merah}       Please run this scripts on SU !           "
+echo "               Please run this scripts on SU !           "
 sleep 10
 sudo su -
 clear
