@@ -4,7 +4,7 @@ echo "               Please run this scripts on SU !           "
 sleep 5
 sudo su -
 clear
-merah = $(tput setaf 1)
+merah=$(tput setaf 1)
 kuning=$(tput setaf 3)
 hijau=$(tput setaf 2)
 echo "${hijau}#################################################^"
