@@ -1,7 +1,7 @@
 #!/bin/bash
 ##
 echo "               Please run this scripts on SU !           "
-sleep 10
+sleep 5
 sudo su -
 clear
 merah = $(tput setaf 1)
