@@ -226,7 +226,7 @@ git clone https://github.com/netdata/netdata.git > /dev/null 2>&1
 sed -i 's/TWAIT} -eq 0 /TWAIT} -eq 1 /g' /opt/netdata/netdata-installer.sh
 chmod a+x /opt/netdata/netdata-installer.sh
 source "/opt/temp/spinner.sh"
-start_spinner '|Installing netdata, please wait (a minut. . . . . . -->'
+start_spinner '|Installing netdata, please wait (a minut. . . . .  -->'
 sleep 1
 cd /opt/netdata/
 ./netdata-installer.sh > /dev/null 2>&1 
