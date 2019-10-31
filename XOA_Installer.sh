@@ -1,11 +1,12 @@
 #!/bin/bash
 ##
 clear
-echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
-echo "            Please run this scripts on SU !               "
-echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
-sleep 5
-sudo su -
+if [[ $EUID -ne 0 ]]; then
+   echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+   echo "            Please run this scripts on SU !               "
+   echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+   exit 1
+fi
 clear
 merah=$(tput setaf 1)
 kuning=$(tput setaf 3)
@@ -226,7 +227,7 @@ git clone https://github.com/netdata/netdata.git > /dev/null 2>&1
 sed -i 's/TWAIT} -eq 0 /TWAIT} -eq 1 /g' /opt/netdata/netdata-installer.sh
 chmod a+x /opt/netdata/netdata-installer.sh
 source "/opt/temp/spinner.sh"
-start_spinner '|Installing netdata, please wait (a minut. . . . .  -->'
+start_spinner '|Installing netdata, please wait (a minut. . . . . . -->'
 sleep 1
 cd /opt/netdata/
 ./netdata-installer.sh > /dev/null 2>&1 
