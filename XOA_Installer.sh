@@ -24,7 +24,7 @@ sleep 10
 echo "${merah}<====================================================>"
 echo "${merah}|      Min spec for cluster, backup, continues       |"
 echo "${merah}|       replication (DC-DR),load balancing etc,      |"
-echo "${merah}|      for XenServer/CitrixHyprrvisor/XCP-NG         |"
+echo "${merah}|      for XenServer/CitrixHypervisor/XCP-NG         |"
 echo "${merah}|     Like XCP, use guest tools from citrix xen      |"
 echo "${merah}|        4vCPU, 16GB RAM, NIC 10G or Bounded         |"
 echo "${merah}<====================================================>"
